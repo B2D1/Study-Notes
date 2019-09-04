@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    .box {
+        width: 300px;
+        height: 300px;
+        color: #FFF;
+        font-size: 40px;
+        text-align: center;
+        background: #333;
+    }
+</style>
+
+<body>
+
+    <div class="box">0</div>
+    <script>
+        const box = document.getElementsByClassName('box')[0];
+        let num = 0;
+        const debounce = (fn, delay) => {
+            let timer = null;
+            return function (...args) {
+                clearTimeout(timer);
+                timer = setTimeout(() => {
+                    fn.apply(this, args)
+                }, delay)
+            }
+        }
+        const throttle = (fn, delay) => {
+            let last = 0;
+            let timer = null;
+            return function (...args) {
+                let now = Date.now();
+                timer = clearTimeout(timer)
+                if (now - last > delay) {
+                    fn.apply(this, args);
+                    last = now;
+                } else {
+                    timer = setTimeout(() => {
+                        fn.apply(this, args);
+                    }, delay)
+                }
+            }
+        }
+        const handler = () => {
+            num++;
+            box.innerHTML = num;
+        }
+        const _handler = throttle(handler, 1000);
+        box.addEventListener('mousemove', _handler)
+    </script>
+</body>
+
+</html>
