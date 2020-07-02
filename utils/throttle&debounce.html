@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <style>
+    .box {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      width: 300px;
+      height: 300px;
+      color: #fff;
+      font-size: 4em;
+      background: #333;
+      margin-right: 100px;
+    }
+  </style>
+
+  <body>
+    <div class="box" id="box1">0</div>
+    <div class="box" id="box2">0</div>
+    <script>
+      const box1 = document.getElementById('box1');
+      const box2 = document.getElementById('box2');
+      const debounce = (fn, delay) => {
+        let timer = null;
+        return function (...args) {
+          clearTimeout(timer);
+          timer = setTimeout(() => {
+            fn.apply(this, args);
+          }, delay);
+        };
+      };
+      const throttle = (fn, delay) => {
+        let last = 0;
+        let timer = null;
+        return function (...args) {
+          let now = Date.now();
+          timer = clearTimeout(timer);
+          if (now - last > delay) {
+            fn.apply(this, args);
+            last = now;
+          } else {
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+            }, delay);
+          }
+        };
+      };
+      const handler1 = () => {
+        let count = box1.innerText;
+        box1.innerText = ~~count + 1;
+      };
+      const handler2 = () => {
+        let count = box2.innerText;
+        box2.innerText = ~~count + 1;
+      };
+
+      const throttleHandler = throttle(handler1, 1000);
+      const debounceHandler = debounce(handler2, 1000);
+
+      box1.addEventListener('mousemove', throttleHandler);
+      box2.addEventListener('mousemove', debounceHandler);
+    </script>
+  </body>
+</html>

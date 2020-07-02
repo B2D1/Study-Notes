@@ -1,15 +1,15 @@
 /**
- * @summary https://www.guru99.com/quicksort-in-javascript.html
+ * https://www.guru99.com/quicksort-in-javascript.html
  */
-function QuickSort(items, left, right) {
+function quickSort(items, left, right) {
   let index;
   if (items.length > 1) {
     index = partition(items, left, right);
     if (left < index - 1) {
-      QuickSort(items, left, index - 1);
+      quickSort(items, left, index - 1);
     }
     if (index < right) {
-      QuickSort(items, index, right);
+      quickSort(items, index, right);
     }
   }
   return items;
@@ -42,5 +42,5 @@ function partition(items, left, right) {
 }
 
 var items = [5, 3, 7, 6, 2, 9];
-var sortedArray = QuickSort(items, 0, items.length - 1);
+var sortedArray = quickSort(items, 0, items.length - 1);
 console.log(sortedArray); // prints [2,3,5,6,7,9]

@@ -1,8 +1,8 @@
 /**
- * @param {Array} arr
- * @summary https://medium.com/javascript-algorithms/javascript-algorithms-insertion-sort-59b6b655373c
+ * https://medium.com/javascript-algorithms/javascript-algorithms-insertion-sort-59b6b655373c
+ * @param {number[]} arr
  */
-function InsertionSort(arr) {
+function insertionSort(arr) {
   for (let i = 1; i < arr.length; i++) {
     let key = arr[i],
       j = i - 1;
@@ -15,4 +15,4 @@ function InsertionSort(arr) {
   return arr;
 }
 
-console.log(InsertionSort([5, 3, 1, 4, 6]));
+console.log(insertionSort([5, 3, 1, 4, 6]));
