@@ -17,4 +17,4 @@ var generate = function (numRows) {
 };
 
 s = generate(5);
-s;
+console.log(s);
