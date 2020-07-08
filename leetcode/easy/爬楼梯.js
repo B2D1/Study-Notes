@@ -3,7 +3,8 @@
  * @return {number}
  */
 var climbStairs = function (n) {
-  // 公式法
+  // 斐波那契数列 0 1 1 2 3
+  // 公式法 n=1 对应 数列的第三项开始
   const sqrt5 = Math.sqrt(5);
   return ~~((Math.pow((1 + sqrt5) / 2, n + 1) - Math.pow((1 - sqrt5) / 2, n + 1)) / sqrt5);
   // 递推法
@@ -19,5 +20,5 @@ var climbStairs = function (n) {
   return res;
 };
 
-s = climbStairs(4);
-s;
+s = climbStairs(3);
+console.log(s);
